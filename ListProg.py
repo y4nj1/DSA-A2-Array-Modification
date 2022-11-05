@@ -32,19 +32,16 @@
 import random
 totalvalues = 10
 min = 0
-max = 999
+max = 99
 OFFSETT = 4
 
+genlist = [81,15,67,32,73,50,24,3,21,72]
+
 # 'menu', creates the main menu to choose option or exit program
-
-def get_list_values():
-    return sorted(random.sample(range(min, max), totalvalues)) 
-
 def list_menu():
     name = ' '*int(OFFSETT/2) + "Playing with Lists"
     dotted = (OFFSETT+len(name))*'-'
-    genlist = get_list_values()
-    options = ["[Add an element]", "[Insert an element]", "[Modify an element]", "[Delete an element]", 
+    options = ["[Reverse the List]", "[Add an element]", "[Delete an element]", "[Find the sum]", 
                 "[Arrange in ascending order]", "[Arrange in descending order]", "[Exit]"]
     print('{} \n{} \n{}'.format(dotted, name, dotted))
     print("\nArray: ", genlist, "\n")
@@ -53,11 +50,55 @@ def list_menu():
         print(i+1, opt)
     print(dotted)
 
+# 'open_add_e', adds an element to the list
+def open_add_e():
+    while len(genlist) == totalvalues:
+        add = input("Input the number between {} and {} that you want to add to this list: ".format(min, max))
+        try:
+            add = int(add)
+        except:
+            print("Sorry, your input must be an integer!")
+            continue
+        if min <= add <= max:
+            genlist.append(add)
+            print("The number has been added!")
+            print("\nYour New Array: ", genlist, "\n")
+            main()
+        else:
+            print("Error! Your number was not in range")
+
+# 'open_rev_l', reverses the order of the list
+def open_rev_l():
+    genlist.reverse()
+    print("The list has been reversed!")
+    print("\nYour New Array: ", genlist, "\n")
+    main()
+
+# 'open_del_e', deletes an element from the list
+def open_del_e():
+    pickdel = input("Select the number you want to delete from the list: ")
+    genlist.remove(pickdel)
+    print("The number has been deleted!")
+    print("\nYour New Array: ", genlist, "\n")
+    main()
+
+# 'main', calls the other functions
 def main():
     list_menu()
     while True:
         choice = input("\nEnter your choice[1-7]: ")
         if choice == '1':
+            string = '\n'"Reverse the List " + "selected!"
+            dotted = '\n'+ len(string) * "-"
+            
+            print(dotted,
+                  string,
+                  dotted)
+            
+            open_rev_l()
+            break
+
+        elif choice == '2':
             string = '\n'"Add an element " + "selected!"
             dotted = '\n'+ len(string) * "-"
             
@@ -68,29 +109,7 @@ def main():
             open_add_e()
             break
 
-        if choice == '2':
-            string = '\n'"Insert an element " + "selected!"
-            dotted = '\n'+ len(string) * "-"
-            
-            print(dotted,
-                  string,
-                  dotted)
-            
-            open_ins_e()
-            break
-
-        if choice == '3':
-            string = '\n'"Modify an element" + "selected!"
-            dotted = '\n'+ len(string) * "-"
-            
-            print(dotted,
-                  string,
-                  dotted)
-            
-            open_mod_e()
-            break
-
-        if choice == '4':
+        elif choice == '3':
             string = '\n'"Delete an element " + "selected!"
             dotted = '\n'+ len(string) * "-"
             
@@ -101,7 +120,18 @@ def main():
             open_del_e()
             break
 
-        if choice == '5':
+        elif choice == '4':
+            string = '\n'"Find the sum " + "selected!"
+            dotted = '\n'+ len(string) * "-"
+            
+            print(dotted,
+                  string,
+                  dotted)
+            
+            open_sum_e()
+            break
+
+        elif choice == '5':
             string = '\n'"Arrange in ascending order " + "selected!"
             dotted = '\n'+ len(string) * "-"
             
@@ -112,7 +142,7 @@ def main():
             open_asc_l()
             break
 
-        if choice == '6':
+        elif choice == '6':
             string = '\n'"Arrange in descending order " + "selected!"
             dotted = '\n'+ len(string) * "-"
             
@@ -129,5 +159,4 @@ def main():
                          
         print("Error! Invalid input. Press any key to continue...\n")
         
-if __name__ == '__main__':
     main()
