@@ -52,7 +52,7 @@ def list_menu():
 
 # 'open_add_e', adds an element to the list
 def open_add_e():
-    while len(genlist) == totalvalues:
+    while len(genlist) >= totalvalues:
         add = input("Input the number between {} and {} that you want to add to this list: ".format(min, max))
         try:
             add = int(add)
@@ -76,9 +76,41 @@ def open_rev_l():
 
 # 'open_del_e', deletes an element from the list
 def open_del_e():
-    pickdel = input("Select the number you want to delete from the list: ")
-    genlist.remove(pickdel)
-    print("The number has been deleted!")
+    while len(genlist) >= totalvalues:
+        pickdel = input("Select the number you want to delete from the list: ")
+        try:
+            pickdel = int(pickdel) 
+        except:
+            print("Sorry, your input must be an integer!")
+            continue
+        if pickdel in genlist:
+            genlist.remove(pickdel)
+            print("The number has been deleted!")
+            print("\nYour New Array: ", genlist, "\n")
+            main()
+        else:
+            print("Error! Your number was not in the list!")
+        
+        
+# 'open_sum_e', determines the sum of all the elements in the list
+def open_sum_e():
+    listsum = sum(genlist)
+    print("\nThe sum of the values in the list is: ", listsum, "\n")
+    print("\nYour New Array: ", genlist, "\n")
+    main()
+
+# 'open_asc_l', sorts the list in ascending order
+def open_asc_l():
+    genlist.sort()
+    print("The list has been arranged in ascending order!")
+    print("\nYour New Array: ", genlist, "\n")
+    main()
+
+# 'open_dsc_l', sorts the list in descending order
+def open_dsc_l():
+    genlist.sort()
+    genlist.reverse()
+    print("The list has been arranged in descending order!")
     print("\nYour New Array: ", genlist, "\n")
     main()
 
@@ -159,4 +191,4 @@ def main():
                          
         print("Error! Invalid input. Press any key to continue...\n")
         
-    main()
+main()
